@@ -1,0 +1,9 @@
+#nprogress .bar {
+    height: 4px !important;
+    background: #a2e2fa !important;
+}
+
+.nav a:hover{
+    border-radius: 0px;
+    background: aliceblue;
+}
