@@ -13,10 +13,12 @@ mongoose
   .connect(process.env.DATABASE_CLOUD)
   .then(() => console.log('DB connected'))
   .catch(err => console.log(err));
+//{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true}
 
 //import routes
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
+const categoryRoutes = require('./routes/category');
 
 //app middleware
 app.use(morgan('dev'));
@@ -28,6 +30,7 @@ app.use(cors({origin: process.env.CLIENT_URL}));
 //middleware
 app.use('/api', authRoutes);
 app.use('/api', userRoutes);
+app.use('/api', categoryRoutes);
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => console.log(`API is running on port ${port}`));
