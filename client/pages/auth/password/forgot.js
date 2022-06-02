@@ -2,7 +2,7 @@ import {useState} from 'react'
 import axios from "axios";
 import {showErrorMessage, showSuccessMessage} from "../../../helpers/alerts";
 import {API} from "../../../config";
-import Layout from "../../../component/Layout";
+import Layout from "../../../components/Layout";
 import Router from 'next/router'
 import React from 'react'
 

@@ -1,4 +1,4 @@
-import Layout from "../../component/Layout";
+import Layout from "../../components/Layout";
 import React from "react";
 import axios from "axios";
 import {API} from "../../config";

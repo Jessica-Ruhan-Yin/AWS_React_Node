@@ -4,7 +4,7 @@ import axios from "axios";
 import {showErrorMessage, showSuccessMessage} from "../../../helpers/alerts";
 import {API} from "../../../config";
 import {withRouter} from "next/router";
-import Layout from "../../../component/Layout";
+import Layout from "../../../components/Layout";
 
 const ActivateAccount = ({router}) => {
   const [state, setState] = useState({

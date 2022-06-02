@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import axios from "axios";
 import {showErrorMessage, showSuccessMessage} from "../../../../helpers/alerts";
 import {API} from "../../../../config";
-import Layout from "../../../../component/Layout";
+import Layout from "../../../../components/Layout";
 import {withRouter} from 'next/router';
 import React from 'react';
 import jwt from 'jsonwebtoken';

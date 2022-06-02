@@ -15,7 +15,8 @@ const Layout = ({children}) => {
     <React.Fragment>
       <link
         rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossOrigin="anonymous"
       />
 
@@ -31,6 +32,12 @@ const Layout = ({children}) => {
         </Link>
       </li>
 
+      <li className="nav-item">
+        <Link href="/user/link/create">
+          <a className="nav-link btn btn-primary"
+             style={{borderRadius: '0'}}>Submit a Link</a>
+        </Link>
+      </li>
 
       {!isAuth() && (
         <React.Fragment>
@@ -69,6 +76,8 @@ const Layout = ({children}) => {
           <a onClick={logout} className="nav-link">Logout</a>
         </li>
       )}
+
+
     </ul>
   );
 
@@ -76,7 +85,7 @@ const Layout = ({children}) => {
   return (
     <React.Fragment>
       {head()} {nav()}
-      <div className="container pt-5 pd-5">{children}</div>
+      <div className="container pt-5 pb-5">{children}</div>
     </React.Fragment>
   );
 };

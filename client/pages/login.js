@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import Layout from "../component/Layout"
+import Layout from "../components/Layout"
 import axios from "axios";
 import {showErrorMessage, showSuccessMessage} from "../helpers/alerts";
 import {API} from '../config'
@@ -10,7 +10,7 @@ import Link from 'next/link'
 const Login = () => {
   const [state, setState] = useState({
     email: 'ruhanyin0725@gmail.com',
-    password: '123456',
+    password: '111111',
     error: '',
     success: '',
     buttonText: 'Login'

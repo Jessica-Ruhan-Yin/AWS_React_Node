@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-import Layout from "../component/Layout"
+import Layout from "../components/Layout"
 import React from "react";
 import axios from "axios";
 import {showSuccessMessage, showErrorMessage} from "../helpers/alerts";
