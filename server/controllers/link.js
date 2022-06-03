@@ -47,18 +47,44 @@ exports.read = (req, res) => {
   //
 };
 
-
+/**
+ * Update link info
+ * @param req
+ * @param res
+ */
 exports.update = (req, res) => {
-  //
-};
+  const {id} = req.params;
+  const {title, url, categories, type, medium} = req.body
+  const updatedLink = {title, url, categories, type, medium}
 
+  Link.findOneAndUpdate({_id: id}, updatedLink, {new: true}).exec((err, updated) => {
+    if (err) {
+      res.status(400).json({error: 'Could not update link'});
+    }
+    res.json(updated);
+  })
 
-exports.remove = (req, res) => {
-  //
 };
 
 /**
- * Calculate the most popular links
+ * Remove a link
+ * @param req
+ * @param res
+ */
+exports.remove = (req, res) => {
+  const {id} = req.params
+  Link.findOneAndRemove({_id: id}).exec((err, data) => {
+    if (err) {
+      res.status(400).json({error: 'Could not delete link'});
+    }
+    res.json({
+      message: 'Link deleted successfully'
+    });
+  })
+};
+
+/**
+ * Update clicks of links
  * @param req
  * @param res
  */

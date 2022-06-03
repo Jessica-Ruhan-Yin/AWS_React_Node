@@ -11,11 +11,12 @@ const {create, list, read, update, remove, clickCount} = require('../controllers
 
 
 //routes
-router.post("/link", linkCreateValidator, runValidation, requireSignin, authMiddleware, create);
-router.get("/links", list);
-router.put("/click-count", clickCount);
-router.get("/link/:slug", read);
-router.put("/link/:slug", linkUpdateValidator, runValidation, requireSignin, authMiddleware, update);
-router.delete("/link/:slug", runValidation, requireSignin, authMiddleware, remove);
+router.post('/link', linkCreateValidator, runValidation, requireSignin, authMiddleware, create);
+router.get('/links', list);
+router.put('/click-count', clickCount);
+router.get('/link/:id', read);
+router.put('/link/:id', linkUpdateValidator, runValidation, requireSignin, authMiddleware, update);
+router.delete('/link/:id', requireSignin, authMiddleware, remove);
+
 
 module.exports = router;
