@@ -198,7 +198,7 @@ const Create = ({token}) => {
         <div className="col-md-4">
           <div className="form-group">
             <label className="text-muted ml-4">Category</label>
-            <ul style={{maxHeight: '100px', overflowY: 'scroll'}}>{showCategories()}</ul>
+            <ul style={{maxHeight: '125px', overflowY: 'scroll'}}>{showCategories()}</ul>
           </div>
           <div className="form-group">
             <label className="text-muted ml-4">Type</label>

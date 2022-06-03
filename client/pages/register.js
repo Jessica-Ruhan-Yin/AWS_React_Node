@@ -14,11 +14,13 @@ const Register = () => {
     password: '',
     error: '',
     success: '',
-    buttonText: 'Register'
+    buttonText: 'Register',
+    loadedCategories: [],
+    categories: []
   });
 
   //extract parameter
-  const {name, email, password, error, success, buttonText} = state;
+  const {name, email, password, error, success, buttonText, loadedCategories, categories} = state;
 
   useEffect(() => {
     isAuth() && Router.push('/');
@@ -28,6 +30,42 @@ const Register = () => {
   const handleChange = (name) => (e) => {
     //change state
     setState({...state, [name]: e.target.value, error: '', success: '', buttonText: 'Register'})
+  };
+
+  // load categories when component mounts using useEffect
+  useEffect(() => {
+    loadCategories();
+  }, []);
+
+  const loadCategories = async () => {
+    const response = await axios.get(`${API}/categories`);
+    setState({...state, loadedCategories: response.data});
+  };
+
+  const handleToggle = c => () => {
+    // return the first index or -1
+    const clickedCategory = categories.indexOf(c);
+    const all = [...categories];
+
+    if (clickedCategory === -1) {
+      all.push(c);
+    } else {
+      all.splice(clickedCategory, 1);
+    }
+    setState({...state, categories: all, success: '', error: ''});
+  };
+
+  // show categories > checkbox
+  const showCategories = () => {
+    return (
+      loadedCategories &&
+      loadedCategories.map((c, i) => (
+        <li className="list-unstyled" key={c._id}>
+          <input type="checkbox" onChange={handleToggle(c._id)} className="mr-2"/>
+          <label className="form-check-label">{c.name}</label>
+        </li>
+      ))
+    );
   };
 
   const handleSubmit = async e => {
@@ -40,7 +78,8 @@ const Register = () => {
       const response = await axios.post(`${API}/register`, {
         name,
         email,
-        password
+        password,
+        categories
       });
       console.log(response);
       //clear the form and change button text
@@ -49,6 +88,7 @@ const Register = () => {
         name: '',
         email: '',
         password: '',
+        categories: [],
         buttonText: 'Submitted',
         success: response.data.message
       });
@@ -90,6 +130,10 @@ const Register = () => {
           type="password"
           className="form-control"
           placeholder="Type your password"/>
+      </div>
+      <div className="form-group">
+        <label className="text-muted ml-4">Pick categories you are interested in</label>
+        <ul style={{maxHeight: '130px', overflowY: 'scroll'}}>{showCategories()}</ul>
       </div>
       <div className="form-group">
         <button className="btn btn-outline-warning">
