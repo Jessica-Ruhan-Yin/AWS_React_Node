@@ -6,6 +6,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import withAdmin from "../../withAdmin";
 import {API} from "../../../config";
 import {getCookie} from "../../../helpers/auth";
+import Link from "next/link";
 
 const Links = ({token, links, totalLinks, linksLimit, linkSkip}) => {
 
@@ -13,6 +14,28 @@ const Links = ({token, links, totalLinks, linksLimit, linkSkip}) => {
   const [limit, setLimit] = useState(linksLimit)
   const [skip, setSkip] = useState(0)
   const [size, setSize] = useState(totalLinks)
+
+  const confirmDelete = (event, id) => {
+    event.preventDefault();
+    let answer = window.confirm('Are you sure to forever DELETE this link?')
+    if (answer) {
+      handleDelete(id);
+    }
+  }
+
+  const handleDelete = async id => {
+    try {
+      const response = await axios.delete(`${API}/link/admin/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      console.log('LINK DELETED', response);
+      process.browser && window.location.reload();
+    } catch (error) {
+      console.log('LINK DELETE FAILED', error)
+    }
+  }
 
   const listOfLinks = () =>
     allLinks.map((l, i) => (
@@ -28,6 +51,14 @@ const Links = ({token, links, totalLinks, linksLimit, linkSkip}) => {
             {moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
           <br/>
           <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
+
+          <Link href={`/user/link/${l._id}`}>
+            <span className="badge text-primary pull-right">Update</span>
+          </Link>
+
+          <span className="badge text-danger pull-right"
+                onClick={(event) => confirmDelete(event, l._id)}>Delete</span>
+
         </div>
         <div className="col-md-12">
           <span className="badge text-dark" style={{fontSize: '14px'}}>{l.type} / {l.medium}</span>
@@ -55,7 +86,7 @@ const Links = ({token, links, totalLinks, linksLimit, linkSkip}) => {
     <Layout>
       <div className="row">
         <div className="col-md-12">
-          <h1 className="display-4 font-weight-bold">All Links</h1>
+          <h1>All Links</h1>
         </div>
       </div>
       <br/>
@@ -77,7 +108,7 @@ const Links = ({token, links, totalLinks, linksLimit, linkSkip}) => {
 
 Links.getInitialProps = async ({req}) => {
   let skip = 0;
-  let limit = 2;
+  let limit = 5;
 
   const token = getCookie('token', req);
 

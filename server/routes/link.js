@@ -16,7 +16,7 @@ router.post('/links', requireSignin, adminMiddleware, list);
 router.put('/click-count', clickCount);
 router.get('/link/:id', read);
 router.put('/link/:id', linkUpdateValidator, runValidation, requireSignin, authMiddleware, canUpdateOrDeleteLink, update);
-router.put('link/admin/:id', linkUpdateValidator, runValidation, requireSignin, adminMiddleware, update);
+router.put('/link/admin/:id', linkUpdateValidator, runValidation, requireSignin, adminMiddleware, update);
 router.delete('/link/:id', requireSignin, authMiddleware, canUpdateOrDeleteLink, remove);
 router.delete('/link/admin/:id', requireSignin, adminMiddleware, remove);
 

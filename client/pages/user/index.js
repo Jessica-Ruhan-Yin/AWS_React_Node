@@ -76,6 +76,9 @@ const User = ({user, userLinks, token}) => {
                 <a className="nav link">Submit a link</a>
               </Link>
             </li>
+
+            <br/>
+
             <li className="nav-item">
               <Link href="/user/profile/update">
                 <a className="nav link">Update profile</a>
