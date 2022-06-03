@@ -9,8 +9,8 @@ import React from "react";
  * it means sending the page with the data already populated from the server.
  */
 const withAdmin = Page => {
-  const WithAuthAdmin = props => <Page {...props}/>
-  WithAuthAdmin.getInitialProps = async context => {
+  const WithAdminUser = props => <Page {...props} />;
+  WithAdminUser.getInitialProps = async context => {
     const token = getCookie('token', context.req);
     let user = null;
     let userLinks = [];
@@ -22,7 +22,7 @@ const withAdmin = Page => {
             authorization: `Bearer ${token}`,
             contentType: 'application/json'
           }
-        })
+        });
         user = response.data.user;
         userLinks = response.data.links;
       } catch (error) {
@@ -49,7 +49,7 @@ const withAdmin = Page => {
     }
   };
 
-  return WithAuthAdmin;
+  return WithAdminUser;
 };
 
 export default withAdmin;
