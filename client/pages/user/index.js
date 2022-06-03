@@ -48,7 +48,7 @@ const User = ({user, userLinks, token}) => {
               {moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
         <br/>
         <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
-        <Link href={`/user/link/${l.slug}`}>
+        <Link href={`/user/link/${l._id}`}>
           <span className="badge text-primary pull-right">Update</span>
         </Link>
         <span className="badge text-danger pull-right"

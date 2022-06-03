@@ -43,8 +43,19 @@ exports.list = (req, res) => {
   })
 };
 
+/**
+ * Read the info of a link
+ * @param req
+ * @param res
+ */
 exports.read = (req, res) => {
-  //
+  const {id} = req.params;
+  Link.findOne({_id: id}).exec((err, data) => {
+    if (err) {
+      res.status(400).json({error: 'Could finding link'});
+    }
+    res.json(data);
+  })
 };
 
 /**
