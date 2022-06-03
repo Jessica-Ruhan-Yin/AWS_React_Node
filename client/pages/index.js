@@ -7,7 +7,7 @@ import React from 'react'
 const Home = ({categories}) => {
   const listCategories = () =>
     categories.map((c, i) => (
-      <Link href={`/links/${c.slug}`}>
+      <Link href={`/links/${c.slug}`} key={c._id}>
         <a style={{border: '1.5px solid #FFC0CB'}} className="bg-light p-3 col-md-4">
           <div key={i}>
             <div className="row">

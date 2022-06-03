@@ -16,22 +16,23 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
 
   const listOfLinks = () =>
     allLinks.map((l, i) => (
-      <div className="row alert alert-primary p-2">
-        <div className="col-md-8" onClick={e => handleClick(l._id)}>
+      <div className="row alert alert-danger p-2" style={{backgroundColor: '#fff5f9'}}>
+        <div key={l._id} className="col-md-8" onClick={e => handleClick(l._id)}>
           <a href={l.url} target="_blank">
-            <h4 className="pt-2">{l.title}</h4>
-            <h6 className="pt-2 text-info" style={{fontSize: '16px'}}>{l.url}</h6>
+            <h4 className="pt-2" style={{color:'#041861'}}>{l.title}</h4>
+            <h6 className="pt-2" style={{fontSize: '16px', color:'#4d78ff'}}>{l.url}</h6>
           </a>
         </div>
         <div className="col-md-4 pt-2">
           <span className="pull-right" style={{fontSize: '16px'}}>
             {moment(l.createdAt).fromNow()} by {l.postedBy.name}</span>
+          <br/>
           <span className="badge text-secondary pull-right">{l.clicks} clicks</span>
         </div>
         <div className="col-md-12">
           <span className="badge text-dark" style={{fontSize: '14px'}}>{l.type} / {l.medium}</span>
           {l.categories.map((c, i) => (
-            <span className="badge text-success">{c.name}</span>
+            <span className="badge" key={c._id} style={{fontSize: '16px', color:'#ffb1d5'}}>{c.name}</span>
           ))}
         </div>
       </div>
@@ -88,7 +89,6 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
         <div className="col-md-8">
           {listOfLinks()}
         </div>
-
         <div className="col-md-4">
           <h1 className="lead">Most popular in {category.name}</h1>
           <p>show popular links</p>
@@ -96,13 +96,14 @@ const Links = ({query, category, links, totalLinks, linksLimit, linkSkip}) => {
       </div>
 
       <div className="row">
-        <div className="col-md-12 text-center">
+        <div className="col-md-12">
           <InfiniteScroll
             pageStart={0}
             loadMore={loadMore}
             hasMore={size > 0 && size >= limit}
-            loader={<img src="/static/images/loading.gif" alt="loading" />}
-          ></InfiniteScroll>
+            loader={<img src="/static/images/loading.gif" alt="loading"/>}
+          >
+          </InfiniteScroll>
         </div>
       </div>
     </Layout>);
