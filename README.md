@@ -14,7 +14,7 @@ This is a highly scalable MERN Stack app with AWS for Storage (S3) Email (SES) H
 ### Tech Stack
 * React and NextJS (React Framework) in the client side.
 * API/server using Node Express MongoDB.
-* AWS services such as S3 for files storage, SES for sending emails and EC2 for cloud hosting IAM for Identity and access management Route 53 for domain management along with custom rules/policy.
+* AWS services such as S3 for files storage, SES for sending emails, EC2 for cloud hosting IAM for Identity and access management Route 53 for domain management along with custom rules/policy.
 * Mongo Atlas as Managed Database Service in the cloud.
 
 ### Install
