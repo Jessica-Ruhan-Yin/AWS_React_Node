@@ -42,3 +42,9 @@ exports.resetPasswordValidator = [
     .withMessage('Password must be at least 6 characters long')
 ];
 
+exports.userUpdateValidator = [
+  check('name')
+    .not()
+    .isEmpty()
+    .withMessage('Name is required')
+];
