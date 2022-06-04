@@ -166,3 +166,53 @@ exports.clickCount = (req, res) => {
     res.json(result)
   })
 };
+
+/**
+ * The most popular links show in the homepage
+ * @param req
+ * @param res
+ */
+exports.popular = (req, res) => {
+  Link.find()
+    .populate('postedBy', 'name')
+    .populate('categories', 'name slug')
+    .sort({clicks: -1})
+    .limit(5)
+    .exec((err, links) => {
+      if (err) {
+        return res.status(400).json({
+          error: 'Links not found'
+        })
+      }
+      res.json(links)
+    })
+}
+
+
+/**
+ * The most popular links in each category
+ * @param req
+ * @param res
+ */
+exports.popularInCategory = (req, res) => {
+  const {slug} = req.params
+  Category.findOne({slug}).exec((err, category) => {
+    if (err) {
+      return res.status(400).json({
+        error: 'Could not load categories'
+      })
+    }
+    // find popular links based on the category
+    Link.find({categories: category})
+      .sort({clicks: -1})
+      .limit(3)
+      .exec((err, links) => {
+        if (err) {
+          return res.status(400).json({
+            error: 'Links not found'
+          })
+        }
+        res.json(links)
+      })
+  })
+}
